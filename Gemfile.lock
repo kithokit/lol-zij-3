@@ -179,6 +179,7 @@ GEM
     rake (10.4.2)
     recipient_interceptor (0.1.2)
       mail
+    refills (0.1.0)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -286,6 +287,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails_stdout_logging
   recipient_interceptor
+  refills
   rspec-rails (~> 3.1.0)
   sass-rails (~> 5.0)
   shoulda-matchers
