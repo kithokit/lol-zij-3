@@ -17,7 +17,7 @@ module Lolconnection
       if @connection.nil?
         @connection =  Lol::Client.new API_KEY, {
           region: "na",
-          redis: "redis://localhost:6379",
+          redis: redis_connection,
           ttl: 900
         }
       end
