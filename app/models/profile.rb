@@ -18,14 +18,14 @@ class Profile
 
   def summoner_id
     if @summoner_id.nil?
-      @summoner_id = connection.summoner.by_name(@name)
+      @summoner_id = Lolconnection.connection.summoner.by_name(@name)
       @summoner_id.first.id.to_s
     end
   end
 
   def leagueinfo
     if @leagueinfo.nil?
-      @leagueinfo = connection.league.get(@summoner_id)
+      @leagueinfo = Lolconnection.connection.league.get(@summoner_id)
       @leagueinfo = @leagueinfo[@summoner_id].first
     end
     @leagueinfo
