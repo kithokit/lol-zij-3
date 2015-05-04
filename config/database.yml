@@ -10,3 +10,12 @@ development: &default
 test:
   <<: *default
   database: lol-zij3_test
+
+staging: &default
+  adapter: postgresql
+  database: lol-zij3_staging
+  encoding: utf8
+  host: ENV["DATABASE_URL"]
+  min_messages: warning
+  pool: 2
+  timeout: 5000
