@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
       players = ["kithokit", "ringopak", "Team Cap", "yamsaihoi"]
       @profiles = []
       players.each { |p|
-        profile = Profile.new(p) rescue nil
+        profile = Profile.new(p) rescue { :name => p }
         @profiles << profile
       }
     end
