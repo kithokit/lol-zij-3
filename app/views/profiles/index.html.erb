@@ -1,6 +1,72 @@
-<h1>ZIJ LOL2</h1>
+<h1>Find Troller in LOL</h1>
 
-Ranked Solo<br>
-Kit Ho
-Win <%= @win =%> Loss <%= @losses =%>
+<form accept-charset="UTF-8" action="/profiles/search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="q">Summoners Name:</label>
+  <input id="q" name="q" type="text" />
+  <input name="commit" type="submit" value="Search" />
+</form>
 
+</br>
+ <% if not @search_profiles.nil? %>
+  <h1>Troller?</h1>
+  <table class="table table-condensed">
+    <tr>
+     <th>Name</th>
+     <th>Tier</th>
+     <th>Total</th>
+     <th>Win Rate</th>
+     <th>Win</th>
+     <th>Loss</th>
+     <th>Onfire?</th>
+   </tr>
+    <% @search_profiles.each do |profile| %>
+     <tr>
+     <% if profile.is_a?(Hash) %>
+       <td>NO SUCH INFO for <%= profile[:name] %></td>
+     <% else %>
+       <td><%= profile.name %></td>
+       <td><%= profile.tier %></td>
+       <td><%= profile.win + profile.loss %></td>
+       <td><%= profile.winrate %>%</td>
+       <td><%= profile.win %></td>
+       <td><%= profile.loss %></td>
+       <% if profile.onfire %>
+        <td>ON FIRE</td>
+       <% else %>
+        <td>NOT ON FIRE</td>
+       <% end %>
+     <% end %>
+     </tr>
+    <% end %>
+  </table>
+ <% end %>
+</br>
+
+<h1>Ranked Solo</h1>
+<table class="table table-condensed">
+  <tr>
+   <th>Name</th>
+   <th>Tier</th>
+   <th>Total</th>
+   <th>Win Rate</th>
+   <th>Win</th>
+   <th>Loss</th>
+   <th>Onfire?</th>
+ </tr>
+<% @profiles.each do |profile| %>
+ <tr>
+   <td><%= profile.name %></td>
+   <td><%= profile.tier %></td>
+   <td><%= profile.win + profile.loss %></td>
+   <td><%= profile.winrate %>%</td>
+   <td><%= profile.win %></td>
+   <td><%= profile.loss %></td>
+   <% if profile.onfire %>
+    <td>ON FIRE</td>
+   <% else %>
+    <td>NOT ON FIRE</td>
+   <% end %>
+ </tr>
+<% end %>
+</table>

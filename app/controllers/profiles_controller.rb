@@ -1,18 +1,33 @@
 require 'lol'
 class ProfilesController < ApplicationController
 
-  API_KEY="1948f104-b8fb-4787-894f-79821a2d45b0"
-
-  def connection
-    if @connection.nil?
-      @connection =  Lol::Client.new API_KEY, {region: "na"}
-    end
-    @connection
+  def index
+    default_players
+    render "index"
   end
 
-  def index
-    @stats = connection.stats.summary(43796077)
-    @win = @stats.detect { |a| a.player_stat_summary_type == "RankedSolo5x5" }.wins
-    @losses = @stats.detect { |a| a.player_stat_summary_type == "RankedSolo5x5" }.losses
+  def search
+    players = parse_query params['q']
+    @search_profiles = players.map { |p|
+      Profile.new(p) rescue { :name => p }
+    }
+    index
+  end
+
+  def parse_query q
+    players = q.split(";")
+    players
+  end
+
+  def default_players
+    if @profile.nil?
+      players = ["kithokit", "ringopak", "Team Cap", "yamsaihoi"]
+      @profiles = []
+      players.each { |p|
+        profile = Profile.new(p) rescue nil
+        @profiles << profile
+      }
+    end
+    @profiles
   end
 end
