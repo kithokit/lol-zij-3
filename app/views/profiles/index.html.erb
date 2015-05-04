@@ -56,6 +56,10 @@
  </tr>
 <% @profiles.each do |profile| %>
  <tr>
+
+ <% if profile.is_a?(Hash) %>
+   <td>NO SUCH INFO for <%= profile[:name] %></td>
+ <% else %>
    <td><%= profile.name %></td>
    <td><%= profile.tier %></td>
    <td><%= profile.win + profile.loss %></td>
@@ -67,6 +71,7 @@
    <% else %>
     <td>NOT ON FIRE</td>
    <% end %>
+  <% end %>
  </tr>
 <% end %>
 </table>
